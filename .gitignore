@@ -5,7 +5,7 @@ env/
 
 # API Keys and secrets
 .env
-.env.local
+.env*
 *.key
 *.pem
 
