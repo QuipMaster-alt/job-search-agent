@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset='UTF-8'>
+<title>Job Assessment Report</title>
+<style>
+
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif; margin: 20px; background: #f5f5f5; }
+        .container { max-width: 1000px; margin: 0 auto; background: white; padding: 30px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+        h1 { color: #333; border-bottom: 3px solid #2563eb; padding-bottom: 10px; }
+        h2 { color: #2563eb; margin-top: 30px; }
+        .summary { display: grid; grid-template-columns: repeat(4, 1fr); gap: 15px; margin: 20px 0; }
+        .stat { background: #f0f9ff; padding: 15px; border-radius: 6px; text-align: center; }
+        .stat-value { font-size: 24px; font-weight: bold; color: #2563eb; }
+        .stat-label { font-size: 12px; color: #666; margin-top: 5px; }
+        .job-card { border: 1px solid #ddd; padding: 20px; margin: 15px 0; border-radius: 6px; }
+        .strong { border-left: 4px solid #10b981; }
+        .good { border-left: 4px solid #f59e0b; }
+        .weak { border-left: 4px solid #ef4444; }
+        .job-title { font-size: 18px; font-weight: bold; color: #333; }
+        .job-company { color: #666; margin: 5px 0; }
+        .job-meta { font-size: 14px; color: #999; margin-top: 10px; }
+        .score { font-size: 28px; font-weight: bold; }
+        .recommendation { margin: 10px 0; }
+        .badge { display: inline-block; padding: 5px 10px; border-radius: 4px; font-size: 12px; font-weight: bold; }
+        .badge-green { background: #d1fae5; color: #065f46; }
+        .badge-yellow { background: #fef3c7; color: #78350f; }
+        .badge-red { background: #fee2e2; color: #7f1d1d; }
+        .skills { margin: 10px 0; }
+        .skill { display: inline-block; background: #e0e7ff; color: #3730a3; padding: 4px 8px; border-radius: 3px; margin: 3px; font-size: 12px; }
+        .red-flag { color: #dc2626; margin: 5px 0; }
+        footer { margin-top: 40px; padding-top: 20px; border-top: 1px solid #ddd; color: #999; font-size: 12px; }
+    
+</style>
+</head>
+<body>
+<div class='container'>
+<h1>📊 Job Assessment Report</h1>
+<div class='summary'>
+<div class='stat'><div class='stat-value'>6</div><div class='stat-label'>Total Assessed</div></div>
+<div class='stat'><div class='stat-value'>74</div><div class='stat-label'>Avg Fit Score</div></div>
+<div class='stat'><div class='stat-value'>2</div><div class='stat-label'>Strong Fits</div></div>
+<div class='stat'><div class='stat-value'>3</div><div class='stat-label'>Good Fits</div></div>
+</div>
+<div class='job-card strong'>
+<div style='display: flex; justify-content: space-between; align-items: start;'>
+<div><div class='job-title'>Director, Business Intelligence</div>
+<div class='job-company'>Tesla</div>
+<div class='job-meta'>Austin, TX
+ • $200,000 - $260,000
+</div></div>
+<div style='text-align: right;'>
+<div class='score'>88%</div>
+<span class='badge badge-green'>🟢 STRONG FIT</span>
+</div></div>
+<div class='skills'>
+<span class='skill'>Director level role</span>
+<span class='skill'>Austin location</span>
+<span class='skill'>High-growth company</span>
+</div>
+</div>
+<div class='job-card strong'>
+<div style='display: flex; justify-content: space-between; align-items: start;'>
+<div><div class='job-title'>Senior Business Intelligence Manager</div>
+<div class='job-company'>Instructure</div>
+<div class='job-meta'>Austin, TX
+ • $180,000 - $220,000
+</div></div>
+<div style='text-align: right;'>
+<div class='score'>85%</div>
+<span class='badge badge-green'>🟢 STRONG FIT</span>
+</div></div>
+<div class='skills'>
+<span class='skill'>BI leadership</span>
+<span class='skill'>Austin location</span>
+<span class='skill'>EdTech market</span>
+</div>
+</div>
+<div class='job-card good'>
+<div style='display: flex; justify-content: space-between; align-items: start;'>
+<div><div class='job-title'>VP of Analytics & Insights</div>
+<div class='job-company'>Tableau Software</div>
+<div class='job-meta'>Seattle, WA
+ • $220,000 - $280,000
+</div></div>
+<div style='text-align: right;'>
+<div class='score'>78%</div>
+<span class='badge badge-yellow'>🟡 CONSIDER</span>
+</div></div>
+<div class='skills'>
+<span class='skill'>VP level</span>
+<span class='skill'>Analytics strategy</span>
+<span class='skill'>Tableau expertise</span>
+</div>
+<div class='red-flag'>
+⚠️ Seattle location (not Austin)<br>
+⚠️ Requires relocation<br>
+</div>
+</div>
+<div class='job-card good'>
+<div style='display: flex; justify-content: space-between; align-items: start;'>
+<div><div class='job-title'>Data Analytics Lead</div>
+<div class='job-company'>Dell Technologies</div>
+<div class='job-meta'>Austin, TX
+ • $160,000 - $200,000
+</div></div>
+<div style='text-align: right;'>
+<div class='score'>72%</div>
+<span class='badge badge-yellow'>🟡 CONSIDER</span>
+</div></div>
+<div class='skills'>
+<span class='skill'>Austin location</span>
+<span class='skill'>Leadership opportunity</span>
+<span class='skill'>Enterprise scale</span>
+</div>
+<div class='red-flag'>
+⚠️ Below target salary<br>
+⚠️ Less strategic than director role<br>
+</div>
+</div>
+<div class='job-card good'>
+<div style='display: flex; justify-content: space-between; align-items: start;'>
+<div><div class='job-title'>Analytics Engineer (Remote)</div>
+<div class='job-company'>Databricks</div>
+<div class='job-meta'>Remote
+ • $170,000 - $240,000
+</div></div>
+<div style='text-align: right;'>
+<div class='score'>65%</div>
+<span class='badge badge-yellow'>🟡 CONSIDER</span>
+</div></div>
+<div class='skills'>
+<span class='skill'>Remote opportunity</span>
+<span class='skill'>Data engineering background</span>
+<span class='skill'>Modern data stack</span>
+</div>
+<div class='red-flag'>
+⚠️ More technical/engineering than leadership<br>
+⚠️ Younger role level<br>
+</div>
+</div>
+<div class='job-card weak'>
+<div style='display: flex; justify-content: space-between; align-items: start;'>
+<div><div class='job-title'>Senior BI Developer</div>
+<div class='job-company'>IBM</div>
+<div class='job-meta'>Hybrid - Austin area
+ • $140,000 - $180,000
+</div></div>
+<div style='text-align: right;'>
+<div class='score'>58%</div>
+<span class='badge badge-red'>🔴 SKIP</span>
+</div></div>
+<div class='skills'>
+<span class='skill'>Austin area</span>
+<span class='skill'>Hybrid flexibility</span>
+</div>
+<div class='red-flag'>
+⚠️ Below target salary<br>
+⚠️ Developer role not leadership<br>
+</div>
+</div>
+<footer>Generated by job-search-agent Phase 2: Job Assessment</footer>
+</div></body></html>

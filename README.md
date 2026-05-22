@@ -52,9 +52,30 @@ python job_scraper.py \
 
 Output: Jobs saved to `data/jobs.json`
 
-#### Phase 2: Assess Job Fit (Coming Soon)
+#### Phase 2: Assess Job Fit
 
-Analyze each job posting for fit, salary, and red flags.
+Analyze each job posting for fit, salary, and red flags using Claude AI:
+
+```bash
+# With API key (uses real Claude)
+export ANTHROPIC_API_KEY="sk-ant-..."
+python job_assessor.py --jobs data/jobs.json --limit 5
+
+# Without API (demo mode with mock data)
+python demo_assessor.py
+
+# Generate reports
+python report_assessments.py --format text
+python report_assessments.py --format html --output report.html
+python report_assessments.py --format json
+```
+
+Output: Assessments saved to `data/assessments.json`
+
+**Fit Score Guide:**
+- 🟢 **80+** — Strong fit, apply immediately
+- 🟡 **60-79** — Good opportunity, consider applying
+- 🔴 **Below 60** — Weak fit, likely mismatch
 
 #### Phase 3: Tailor Resume
 
