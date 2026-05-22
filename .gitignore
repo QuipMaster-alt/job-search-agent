@@ -40,7 +40,6 @@ wheels/
 .DS_Store
 
 # Job data and outputs
-data/jobs.json
 tailored_resumes/
 debug_response.txt
 
