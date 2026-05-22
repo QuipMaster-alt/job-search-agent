@@ -4,12 +4,22 @@ tailor_resume.py
 Takes your master RenderCV YAML + a job description and produces a
 tailored YAML + rendered PDF using the Claude API.
 
-Usage:
+Supports single job or batch processing from Phase 2 assessments.
+
+Usage (single job):
     python tailor_resume.py \
         --cv Luis_CV.yaml \
         --job "path/to/job_description.txt" \
         --company "Instructure" \
         --title "VP Business Intelligence" \
+        [--output-dir ./tailored_resumes]
+
+Usage (batch from assessments):
+    python tailor_resume.py \
+        --cv Luis_CV.yaml \
+        --batch-assess data/assessments.json \
+        --jobs data/jobs.json \
+        --min-fit 80 \
         [--output-dir ./tailored_resumes]
 
 Requirements:
@@ -22,6 +32,7 @@ Environment:
 
 import argparse
 import json
+import logging
 import os
 import re
 import subprocess
@@ -29,9 +40,13 @@ import sys
 from copy import deepcopy
 from datetime import datetime
 from pathlib import Path
+from typing import Optional
 
 import anthropic
 import yaml
+
+logger = logging.getLogger(__name__)
+logging.basicConfig(level=logging.INFO, format="%(message)s")
 
 
 # ─────────────────────────────────────────────
@@ -59,6 +74,7 @@ edits — never fabricate experience.
 ## Job Posting
 Company: {company}
 Title: {title}
+Location: {location}
 
 {job_description}
 
@@ -142,7 +158,8 @@ def parse_claude_yaml(raw: str) -> dict:
     return yaml.safe_load(cleaned)
 
 
-def render_pdf(yaml_path: Path, output_dir: Path) -> Path:
+def render_pdf(yaml_path: Path, output_dir: Path) -> Optional[Path]:
+    """Render PDF using RenderCV. Returns None if rendering fails."""
     result = subprocess.run(
         [
             sys.executable, "-m", "rendercv", "render",
@@ -153,13 +170,13 @@ def render_pdf(yaml_path: Path, output_dir: Path) -> Path:
         text=True,
     )
     if result.returncode != 0:
-        print("⚠️  RenderCV stderr:\n", result.stderr)
-        raise RuntimeError(f"rendercv render failed:\n{result.stdout}\n{result.stderr}")
+        logger.warning(f"⚠️  RenderCV failed: {result.stderr[:200]}")
+        return None
 
     pdfs = list(output_dir.glob("*.pdf"))
-    if not pdfs:
-        raise FileNotFoundError(f"No PDF found in {output_dir} after rendering.")
-    return pdfs[0]
+    if pdfs:
+        return pdfs[0]
+    return None
 
 
 # ─────────────────────────────────────────────
@@ -168,71 +185,123 @@ def render_pdf(yaml_path: Path, output_dir: Path) -> Path:
 
 def tailor(
     cv_path: Path,
-    job_path: Path,
-    company: str,
-    title: str,
+    job_title: str,
+    job_company: str,
+    job_location: str,
+    job_description: str,
     output_dir: Path,
     dry_run: bool = False,
-):
-    print(f"\n🔍  Loading CV from {cv_path}")
+) -> Optional[dict]:
+    """Tailor a single resume for a job posting.
+    
+    Returns dict with paths to generated files, or None if failed.
+    """
+    logger.info(f"  📝 {job_title} @ {job_company} ({job_location})")
+
     master_cv = load_yaml(cv_path)
-
-    print(f"📄  Loading job description from {job_path}")
-    job_description = read_text(job_path)
-
     cv_sections = master_cv.get("cv", {}).get("sections", {})
     cv_sections_yaml = yaml.dump(cv_sections, allow_unicode=True, sort_keys=False)
 
     prompt = TAILOR_PROMPT.format(
         profile=PROFILE_CONTEXT,
-        company=company,
-        title=title,
+        company=job_company,
+        title=job_title,
+        location=job_location,
         job_description=job_description,
         cv_sections_yaml=cv_sections_yaml,
     )
 
-    print(f"🤖  Calling Claude to tailor resume for {title} @ {company}...")
     if dry_run:
-        print("\n[DRY RUN] Prompt preview (first 800 chars):\n")
-        print(prompt[:800])
-        print("\n[DRY RUN] Skipping API call and render.")
-        return
-
-    raw_response = call_claude(prompt)
+        logger.info("     [DRY RUN] Skipping Claude API call")
+        return None
 
     try:
+        raw_response = call_claude(prompt)
         tailored_data = parse_claude_yaml(raw_response)
-    except yaml.YAMLError as e:
-        print("❌  Claude returned invalid YAML. Raw response saved to debug_response.txt")
-        Path("debug_response.txt").write_text(raw_response)
-        raise e
+    except Exception as e:
+        logger.error(f"     ❌ Failed to tailor: {e}")
+        return None
 
+    # Merge with master CV
     tailored_cv = deepcopy(master_cv)
     tailored_cv["cv"]["sections"] = tailored_data.get("sections") or tailored_data
 
     if "top_note" in tailored_data:
         tailored_cv.setdefault("cv", {})["top_note"] = tailored_data["top_note"]
 
+    # Save files
     date_str = datetime.today().strftime("%Y%m%d")
-    company_slug = slug(company)
-    title_slug = slug(title)
+    company_slug = slug(job_company)
+    title_slug = slug(job_title)
     output_dir.mkdir(parents=True, exist_ok=True)
 
-    tailored_yaml_path = output_dir / f"Luis_CV_{company_slug}_{title_slug}_{date_str}.yaml"
-    render_output_dir = output_dir / f"{company_slug}_{date_str}"
+    tailored_yaml_path = output_dir / f"CV_{company_slug}_{title_slug}_{date_str}.yaml"
+    render_output_dir = output_dir / f"{company_slug}_{title_slug}_{date_str}"
 
     save_yaml(tailored_cv, tailored_yaml_path)
-    print(f"✅  Tailored YAML saved: {tailored_yaml_path}")
+    logger.info(f"     ✅ YAML: {tailored_yaml_path.name}")
 
-    print(f"🖨️   Rendering PDF with RenderCV...")
-    try:
-        pdf_path = render_pdf(tailored_yaml_path, render_output_dir)
-        print(f"✅  PDF ready: {pdf_path}")
-    except Exception as e:
-        print(f"⚠️   PDF render failed (YAML was saved): {e}")
-        print(f"     You can render manually: rendercv render \"{tailored_yaml_path}\"")
+    # Try to render PDF
+    pdf_path = render_pdf(tailored_yaml_path, render_output_dir)
+    if pdf_path:
+        logger.info(f"     ✅ PDF: {pdf_path.name}")
+    else:
+        logger.warning(f"     ⚠️  PDF render skipped (rendercv not available)")
 
-    print(f"\n📁  All outputs in: {output_dir}")
+    return {
+        "yaml_path": str(tailored_yaml_path),
+        "pdf_path": str(pdf_path) if pdf_path else None,
+        "company": job_company,
+        "title": job_title,
+    }
+
+
+def tailor_batch(
+    cv_path: Path,
+    jobs_file: Path,
+    assessments_file: Path,
+    min_fit: int = 80,
+    output_dir: Path = Path("tailored_resumes"),
+    dry_run: bool = False,
+) -> list[dict]:
+    """Tailor resumes for all jobs above a fit threshold.
+    
+    Returns list of results from tailor().
+    """
+    logger.info(f"\n🎯 Batch tailoring resumes for jobs with fit ≥ {min_fit}")
+
+    # Load data
+    jobs_data = json.loads(jobs_file.read_text())
+    assessments_data = json.loads(assessments_file.read_text())
+
+    # Filter to strong fits
+    strong_jobs = []
+    for job_id, job_data in jobs_data.items():
+        if job_id in assessments_data:
+            assessment = assessments_data[job_id]
+            if assessment["fit_score"] >= min_fit:
+                strong_jobs.append((job_data, assessment))
+
+    strong_jobs.sort(key=lambda x: x[1]["fit_score"], reverse=True)
+
+    logger.info(f"  Found {len(strong_jobs)} jobs with fit ≥ {min_fit}")
+
+    results = []
+    for job_data, assessment in strong_jobs:
+        result = tailor(
+            cv_path=cv_path,
+            job_title=job_data["title"],
+            job_company=job_data["company"],
+            job_location=job_data["location"],
+            job_description=f"URL: {job_data['url']}\n\n{job_data.get('description', '')}",
+            output_dir=output_dir,
+            dry_run=dry_run,
+        )
+        if result:
+            results.append(result)
+
+    logger.info(f"\n✅ Tailored {len(results)} resumes")
+    return results
 
 
 # ─────────────────────────────────────────────
@@ -241,36 +310,76 @@ def tailor(
 
 def main():
     parser = argparse.ArgumentParser(
-        description="Tailor a RenderCV resume YAML for a specific job posting using Claude."
+        description="Tailor RenderCV resume for job postings (single or batch)."
     )
-    parser.add_argument("--cv", required=True, help="Path to your master RenderCV YAML file")
-    parser.add_argument("--job", required=True, help="Path to job description text file")
-    parser.add_argument("--company", required=True, help='Company name, e.g. "Instructure"')
-    parser.add_argument("--title", required=True, help='Job title, e.g. "VP Business Intelligence"')
-    parser.add_argument("--output-dir", default="./tailored_resumes")
-    parser.add_argument("--dry-run", action="store_true")
+    
+    # Single job mode
+    parser.add_argument("--cv", required=True, help="Path to master RenderCV YAML file")
+    parser.add_argument("--job", help="Path to job description text file (single mode)")
+    parser.add_argument("--company", help="Company name (single mode)")
+    parser.add_argument("--title", help="Job title (single mode)")
+    
+    # Batch mode
+    parser.add_argument("--batch-assess", help="Path to assessments JSON (batch mode)")
+    parser.add_argument("--jobs", help="Path to jobs JSON (batch mode)")
+    parser.add_argument("--min-fit", type=int, default=80, help="Min fit score for batch (default: 80)")
+    
+    # Common
+    parser.add_argument("--output-dir", default="tailored_resumes", help="Output directory")
+    parser.add_argument("--dry-run", action="store_true", help="Don't call Claude API")
+    
     args = parser.parse_args()
 
     cv_path = Path(args.cv)
-    job_path = Path(args.job)
     if not cv_path.exists():
-        print(f"❌  CV file not found: {cv_path}")
-        sys.exit(1)
-    if not job_path.exists():
-        print(f"❌  Job description file not found: {job_path}")
-        sys.exit(1)
-    if not os.environ.get("ANTHROPIC_API_KEY") and not args.dry_run:
-        print("❌  ANTHROPIC_API_KEY environment variable not set.")
+        logger.error(f"❌ CV file not found: {cv_path}")
         sys.exit(1)
 
-    tailor(
-        cv_path=cv_path,
-        job_path=job_path,
-        company=args.company,
-        title=args.title,
-        output_dir=Path(args.output_dir),
-        dry_run=args.dry_run,
-    )
+    if not os.environ.get("ANTHROPIC_API_KEY") and not args.dry_run:
+        logger.error("❌ ANTHROPIC_API_KEY environment variable not set.")
+        sys.exit(1)
+
+    output_dir = Path(args.output_dir)
+
+    # Batch mode
+    if args.batch_assess and args.jobs:
+        assessments_path = Path(args.batch_assess)
+        jobs_path = Path(args.jobs)
+        if not assessments_path.exists() or not jobs_path.exists():
+            logger.error(f"❌ Batch files not found")
+            sys.exit(1)
+        
+        tailor_batch(
+            cv_path=cv_path,
+            jobs_file=jobs_path,
+            assessments_file=assessments_path,
+            min_fit=args.min_fit,
+            output_dir=output_dir,
+            dry_run=args.dry_run,
+        )
+    # Single mode
+    elif args.job and args.company and args.title:
+        job_path = Path(args.job)
+        if not job_path.exists():
+            logger.error(f"❌ Job description file not found: {job_path}")
+            sys.exit(1)
+        
+        job_description = read_text(job_path)
+        
+        logger.info(f"\n📄 Tailoring resume for {args.title} @ {args.company}")
+        tailor(
+            cv_path=cv_path,
+            job_title=args.title,
+            job_company=args.company,
+            job_location="",
+            job_description=job_description,
+            output_dir=output_dir,
+            dry_run=args.dry_run,
+        )
+        logger.info(f"\n📁 Outputs in: {output_dir}")
+    else:
+        logger.error("❌ Specify either:\n  Single: --job, --company, --title\n  Batch: --batch-assess, --jobs")
+        sys.exit(1)
 
 
 if __name__ == "__main__":

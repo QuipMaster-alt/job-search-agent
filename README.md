@@ -79,7 +79,9 @@ Output: Assessments saved to `data/assessments.json`
 
 #### Phase 3: Tailor Resume
 
-Adapt your resume for a specific job:
+Adapt your resume for specific jobs using Claude AI.
+
+**Single job mode:**
 
 ```bash
 python tailor_resume.py \
@@ -88,6 +90,26 @@ python tailor_resume.py \
   --company "Instructure" \
   --title "VP Business Intelligence"
 ```
+
+**Batch mode** (tailor for all strong-fit jobs):
+
+```bash
+# Demo (dry-run, no API calls)
+python demo_tailor.py
+
+# Real (with API key)
+export ANTHROPIC_API_KEY="sk-ant-..."
+python tailor_resume.py \
+  --cv Luis_CV.yaml \
+  --batch-assess data/assessments.json \
+  --jobs data/jobs.json \
+  --min-fit 80  # Only tailor for fit scores 80+
+```
+
+Outputs:
+- Tailored YAML resume (customized for job)
+- PDF rendering (if RenderCV available)
+- Organized in `tailored_resumes/` directory
 
 ## Project Structure
 

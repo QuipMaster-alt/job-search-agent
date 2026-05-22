@@ -1,186 +1,95 @@
 # yaml-language-server: $schema=https://raw.githubusercontent.com/rendercv/rendercv/refs/tags/v2.8/schema.json
 cv:
   name: Luis Martinez
-  headline:
-  location: San Francisco, CA
-  email: john.doe@email.com
+  headline: Business Intelligence Executive  | BI Leader with 15+ years of experience in Tech, Education, and Travel. designing and delivering reporting systems that translate complex data into actionable intelligence for executive and cross-functional stakeholders. Proven track record building compliance reporting infrastructure under active regulatory scrutiny, establishing data governance standards, and developing real-time dashboards that drive operational decision-making. Deep practitioner experience across Tableau, Looker, Snowflake, and AI-driven analytics — with a consistent pattern of turning fragmented data into unified, trusted reporting frameworks at scale.
+  email: luispmartinez@icloud.com
   photo:
-  phone:
-  website: https://rendercv.com/
+  phone: "+13127303613"
   social_networks:
     - network: LinkedIn
-      username: rendercv
-    - network: GitHub
-      username: rendercv
+      username: luispablomartinez
   custom_connections:
+    - placeholder: Tableau Public Profile
+      url: https://public.tableau.com/app/profile/luis.pablo6724
+      fontawesome_icon: chart-bar
   sections:
-    Welcome to RenderCV:
-      - RenderCV reads a CV written in a YAML file, and generates a PDF with professional typography.
-      - Each section title is arbitrary.
-      - You can choose any of the 9 entry types for each section.
-      - Markdown syntax is supported everywhere. This is **bold**, *italic*, and [link](https://example.com).
+    experience: 
+      - company: Apple Inc.
+        position: Contractor - Client Insights Manager
+        start_date: 2025-08
+        end_date: 2026-05
+        location: Austin, TX
+        summary:
+        highlights:
+          - "Enterprise Reporting & Governance: Directed analytics strategy and governance for Corporate Travel, Meetings & Events, and Entertainment — designing and maintaining 200+ Tableau dashboards that democratized data access for 100k+ global employees and shifted the organization toward a self-service, data-driven culture."
+          - "Reporting Automation: Architected a multi-fact data model in Tableau Desktop to automate reporting, converting an 80-hour quarterly manual process into an on-demand suite; freed ~320 hours of analyst capacity annually (valued at $35k+ in recaptured labor)."
+          - "AI-Driven Data Quality: Spearheaded a data quality initiative utilizing Generative AI (Claude, Gemini) for automated validation; ensured 100% fidelity in high-stakes reports and identified nuanced anomalies often missed by manual review."
+          - "Operational Intelligence: Engineered a custom staff-modeling dashboard reconciling actual vs. estimated hours; quantified a 2-FTE staffing deficit, providing data-backed justification to optimize workload distribution and prevent burnout."
+          - "Team Development: Led and mentored a team of 3 analysts, institutionalizing structured training sessions that increased technical self-sufficiency and reduced reliance on external support for complex visualization needs."
+      - company: Austin Independent School District
+        position: Director, Data Analytics and Reporting
+        start_date: 2024-01
+        end_date: 2025-08
+        location: Austin, TX
+        summary:
+        highlights:
+          - "Compliance Reporting: Architected data governance dashboards under active legal scrutiny from a special education compliance lawsuit; built reporting infrastructure meeting state authority requirements, identified training gaps that drove a district-wide remediation program, and established the data framework that served as the functional blueprint for the district's subsequent vendor-procured reporting system."
+          - "Risk Tracking & Executive Reporting: Developed a strategic monitoring dashboard correlating registration trends with historical campus performance — creating a single source of truth that unified C-suite leaders across Enrollment, Technology, and Communications, escalated to the Superintendent and Board for action."
+          - "Data Quality: Project managed a Snowflake initiative to automate data cleaning of student assessment records; decreased errors by 95%."
+      - company: Texas Education Agency
+        position: Manager, Data Fellows Program
+        start_date: 2022-03
+        end_date: 2024-01
+        location: Austin, TX
+        summary:
+        highlights:
+          - "Power BI Program Leadership: Directed the statewide launch of a Power BI training program serving 200+ districts; implemented and taught DAX, Power Query (M), row-level security, and data modeling best practices — achieving a 95% satisfaction rate and empowering districts to build campus turnaround plans from data."
+          - "Standards & Governance: Established agency-wide BI standards via cross-functional workshops — decreasing dashboard build time by 75% while achieving 100% parity with legacy system reporting; managed a $15M program budget."
+      - company: Texas Higher Education Coordinating Board
+        position: Program Director 
+        start_date: 2017-08
+        end_date: 2022-03
+        location: Austin, TX
+        summary:
+        highlights:
+          - "Dashboard Launch & Optimization: Architected and launched an interactive reporting suite for Texas's statewide strategic plan; gathered requirements and synthesized feedback from 120+ executives to retool dashboards iteratively — directly informing grant award decisions and leading institutions to increase performance targets by as much as 50%."
+          - "Reporting Infrastructure: Standardized the BI lifecycle via a Tableau Center of Excellence, accelerating project delivery timelines by 66% and eliminating agency dependence on manual spreadsheet-based reporting."
+      - company: Virtuin
+        position: Owner & Lead Consultant
+        start_date: 2010-05
+        end_date: 2017-08
+        location: Chicago, IL
+        summary:
+        highlights:
+          - "Stakeholder Intelligence: Delivered market research that led Texas A&M School of Law to launch a new certificate program, creating a net-new revenue stream — translating complex data into a clear go/no-go business decision for non-technical leadership."
+          - "Business Performance: Founded a market research firm generating 50.7% gross profit margins in the first three years."
     education:
-      - institution: Princeton University
-        area: Computer Science
-        degree: PhD
-        date:
-        start_date: 2018-09
-        end_date: 2023-05
-        location: Princeton, NJ
-        summary:
-        highlights:
-          - 'Thesis: Efficient Neural Architecture Search for Resource-Constrained Deployment'
-          - 'Advisor: Prof. Sanjeev Arora'
-          - NSF Graduate Research Fellowship, Siebel Scholar (Class of 2022)
-      - institution: Boğaziçi University
-        area: Computer Engineering
-        degree: BS
-        date:
-        start_date: 2014-09
-        end_date: 2018-06
-        location: Istanbul, Türkiye
-        summary:
-        highlights:
-          - 'GPA: 3.97/4.00, Valedictorian'
-          - Fulbright Scholarship recipient for Graduate Studies
-    experience:
-      - company: Nexus AI
-        position: Co-Founder & CTO
-        date:
-        start_date: 2023-06
-        end_date: present
-        location: San Francisco, CA
-        summary:
-        highlights:
-          - Built foundation model infrastructure serving 2M+ monthly API requests with 99.97% uptime
-          - Raised $18M Series A led by Sequoia Capital, with participation from a16z and Founders Fund
-          - Scaled engineering team from 3 to 28 across ML research, platform, and applied AI divisions
-          - Developed proprietary inference optimization reducing latency by 73% compared to baseline
-      - company: NVIDIA Research
-        position: Research Intern
-        date:
-        start_date: 2022-05
-        end_date: 2022-08
-        location: Santa Clara, CA
-        summary:
-        highlights:
-          - Designed sparse attention mechanism reducing transformer memory footprint by 4.2x
-          - Co-authored paper accepted at NeurIPS 2022 (spotlight presentation, top 5% of submissions)
-      - company: Google DeepMind
-        position: Research Intern
-        date:
-        start_date: 2021-05
-        end_date: 2021-08
-        location: London, UK
-        summary:
-        highlights:
-          - Developed reinforcement learning algorithms for multi-agent coordination
-          - Published research at top-tier venues with significant academic impact
-            - ICML 2022 main conference paper, cited 340+ times within two years
-            - NeurIPS 2022 workshop paper on emergent communication protocols
-            - Invited journal extension in JMLR (2023)
-      - company: Apple ML Research
-        position: Research Intern
-        date:
-        start_date: 2020-05
-        end_date: 2020-08
-        location: Cupertino, CA
-        summary:
-        highlights:
-          - Created on-device neural network compression pipeline deployed across 50M+ devices
-          - Filed 2 patents on efficient model quantization techniques for edge inference
-      - company: Microsoft Research
-        position: Research Intern
-        date:
-        start_date: 2019-05
-        end_date: 2019-08
-        location: Redmond, WA
-        summary:
-        highlights:
-          - Implemented novel self-supervised learning framework for low-resource language modeling
-          - Research integrated into Azure Cognitive Services, reducing training data requirements by 60%
-    projects:
-      - name: '[FlashInfer](https://github.com/)'
-        date:
-        start_date: 2023-01
-        end_date: present
-        location:
-        summary: Open-source library for high-performance LLM inference kernels
-        highlights:
-          - Achieved 2.8x speedup over baseline attention implementations on A100 GPUs
-          - Adopted by 3 major AI labs, 8,500+ GitHub stars, 200+ contributors
-      - name: '[NeuralPrune](https://github.com/)'
-        date: '2021'
-        start_date:
-        end_date:
-        location:
-        summary: Automated neural network pruning toolkit with differentiable masks
-        highlights:
-          - Reduced model size by 90% with less than 1% accuracy degradation on ImageNet
-          - Featured in PyTorch ecosystem tools, 4,200+ GitHub stars
-    publications:
-      - title: 'Sparse Mixture-of-Experts at Scale: Efficient Routing for Trillion-Parameter Models'
-        authors:
-          - '*John Doe*'
-          - Sarah Williams
-          - David Park
-        summary:
-        doi: 10.1234/neurips.2023.1234
-        url:
-        journal: NeurIPS 2023
-        date: 2023-07
-      - title: Neural Architecture Search via Differentiable Pruning
-        authors:
-          - James Liu
-          - '*John Doe*'
-        summary:
-        doi: 10.1234/neurips.2022.5678
-        url:
-        journal: NeurIPS 2022, Spotlight
-        date: 2022-12
-      - title: Multi-Agent Reinforcement Learning with Emergent Communication
-        authors:
-          - Maria Garcia
-          - '*John Doe*'
-          - Tom Anderson
-        summary:
-        doi: 10.1234/icml.2022.9012
-        url:
-        journal: ICML 2022
-        date: 2022-07
-      - title: On-Device Model Compression via Learned Quantization
-        authors:
-          - '*John Doe*'
-          - Kevin Wu
-        summary:
-        doi: 10.1234/iclr.2021.3456
-        url:
-        journal: ICLR 2021, Best Paper Award
-        date: 2021-05
-    selected_honors:
-      - bullet: MIT Technology Review 35 Under 35 Innovators (2024)
-      - bullet: Forbes 30 Under 30 in Enterprise Technology (2024)
-      - bullet: ACM Doctoral Dissertation Award Honorable Mention (2023)
-      - bullet: Google PhD Fellowship in Machine Learning (2020 – 2023)
-      - bullet: Fulbright Scholarship for Graduate Studies (2018)
+      - institution: DePaul University
+        area: Entrepreneurship
+        degree: MBA
+        start_date: 2008-09
+        end_date: 2010-06
+        location: Chicago, IL
+      - institution: DePaul University
+        area: Communications
+        degree: BA
+        start_date: 2002-01
+        end_date: 2004-06
+        location: Chicago, IL
     skills:
-      - label: Languages
-        details: Python, C++, CUDA, Rust, Julia
-      - label: ML Frameworks
-        details: PyTorch, JAX, TensorFlow, Triton, ONNX
-      - label: Infrastructure
-        details: Kubernetes, Ray, distributed training, AWS, GCP
-      - label: Research Areas
-        details: Neural architecture search, model compression, efficient inference, multi-agent RL
-    patents:
-      - number: Adaptive Quantization for Neural Network Inference on Edge Devices (US Patent 11,234,567)
-      - number: Dynamic Sparsity Patterns for Efficient Transformer Attention (US Patent 11,345,678)
-      - number: Hardware-Aware Neural Architecture Search Method (US Patent 11,456,789)
-    invited_talks:
-      - reversed_number: Scaling Laws for Efficient Inference — Stanford HAI Symposium (2024)
-      - reversed_number: Building AI Infrastructure for the Next Decade — TechCrunch Disrupt (2024)
-      - reversed_number: 'From Research to Production: Lessons in ML Systems — NeurIPS Workshop (2023)'
-      - reversed_number: "Efficient Deep Learning: A Practitioner's Perspective — Google Tech Talk (2022)"
+      - label: Reporting & Visualization
+        details: Tableau, Looker, Power BI — dashboard design, real-time reporting, KPI tracking
+      - label: Data Management
+        details: Snowflake, SQL, data modeling, data governance, data quality
+      - label: Programming & Automation
+        details: R, Python, reporting automation
+      - label: AI & Analytics
+        details: Generative AI (Claude, Gemini), predictive modeling, statistical analysis
+      - label: Team Leadership
+        details: cross-functional collaboration, mentorship, training program development, $15M budget management
+      - label: Governance & Compliance
+        details: Compliance reporting frameworks, regulatory reporting, state authority reporting, data quality standards
+  
 design:
   theme: classic
   # page:
