@@ -2,14 +2,7 @@
 
 AI-powered job search agent that finds job postings, assesses fit and pay, and tailors your resume for ATS compatibility.
 
-## Features
-
-✨ **Job Discovery** — Search across Indeed, LinkedIn, Glassdoor, and other job boards
-🤖 **Smart Assessment** — Claude analyzes job fit, salary alignment, and red flags
-📄 **Resume Tailoring** — Automatically adapt your resume for each role and optimize for ATS
-📊 **Tracking** — Store and organize all discovered jobs locally
-
-## Quick Start
+## 🚀 Quick Start
 
 ### Installation
 
@@ -26,21 +19,37 @@ source venv/bin/activate
 pip install -r requirements.txt
 ```
 
-### Environment Setup
+### Complete Workflow (One Command!)
 
 ```bash
-# Create .env file with your API key
-echo "ANTHROPIC_API_KEY=sk-ant-..." > .env
+# Demo mode (no API key needed)
+python main.py \
+  --keyword "Business Intelligence" \
+  --location "Austin, TX" \
+  --demo
 
-# Or export as environment variable
+# Real search + assessment + tailoring
 export ANTHROPIC_API_KEY="sk-ant-..."
+python main.py \
+  --keyword "Business Intelligence" \
+  --location "Austin, TX" \
+  --cv Luis_CV.yaml \
+  --tailor-resumes
 ```
 
-### Usage
+**Output:** Jobs, assessments, tailored resumes, and reports in `search_results/`
 
-#### Phase 1: Discover Jobs
+## Features
 
-Search for jobs across multiple job boards:
+✨ **Job Discovery** — Search across Indeed, LinkedIn, Glassdoor
+🤖 **Smart Assessment** — Claude analyzes job fit, salary alignment, red flags
+📄 **Resume Tailoring** — Adapt resume for each role, optimize for ATS
+📊 **Comprehensive Reports** — Text, HTML, and JSON formats
+🔀 **Batch Processing** — Process multiple jobs automatically
+
+## 4-Phase Workflow
+
+### Phase 1: Job Discovery
 
 ```bash
 python job_scraper.py \
@@ -50,117 +59,128 @@ python job_scraper.py \
   --limit 50
 ```
 
-Output: Jobs saved to `data/jobs.json`
-
-#### Phase 2: Assess Job Fit
-
-Analyze each job posting for fit, salary, and red flags using Claude AI:
+### Phase 2: Job Assessment
 
 ```bash
-# With API key (uses real Claude)
+# Real assessment (requires API key)
 export ANTHROPIC_API_KEY="sk-ant-..."
-python job_assessor.py --jobs data/jobs.json --limit 5
+python job_assessor.py
 
-# Without API (demo mode with mock data)
+# Demo assessment (no API needed)
 python demo_assessor.py
 
 # Generate reports
 python report_assessments.py --format text
 python report_assessments.py --format html --output report.html
-python report_assessments.py --format json
 ```
 
-Output: Assessments saved to `data/assessments.json`
+**Fit Scores:**
+- 🟢 80+ — Strong fit
+- 🟡 60-79 — Good fit
+- 🔴 <60 — Weak fit
 
-**Fit Score Guide:**
-- 🟢 **80+** — Strong fit, apply immediately
-- 🟡 **60-79** — Good opportunity, consider applying
-- 🔴 **Below 60** — Weak fit, likely mismatch
+### Phase 3: Resume Tailoring
 
-#### Phase 3: Tailor Resume
-
-Adapt your resume for specific jobs using Claude AI.
-
-**Single job mode:**
-
+**Single job:**
 ```bash
 python tailor_resume.py \
   --cv Luis_CV.yaml \
-  --job "path/to/job_description.txt" \
+  --job job_description.txt \
   --company "Instructure" \
   --title "VP Business Intelligence"
 ```
 
-**Batch mode** (tailor for all strong-fit jobs):
-
+**Batch mode:**
 ```bash
-# Demo (dry-run, no API calls)
-python demo_tailor.py
-
-# Real (with API key)
-export ANTHROPIC_API_KEY="sk-ant-..."
 python tailor_resume.py \
   --cv Luis_CV.yaml \
   --batch-assess data/assessments.json \
   --jobs data/jobs.json \
-  --min-fit 80  # Only tailor for fit scores 80+
+  --min-fit 80
 ```
 
-Outputs:
-- Tailored YAML resume (customized for job)
-- PDF rendering (if RenderCV available)
-- Organized in `tailored_resumes/` directory
+### Phase 4: Orchestration
+
+Run all phases in one command:
+
+```bash
+python main.py \
+  --keyword "Business Intelligence" \
+  --location "Austin, TX" \
+  --cv Luis_CV.yaml \
+  --tailor-resumes
+```
+
+**Options:**
+- `--no-discover` — Skip job discovery
+- `--no-assess` — Skip assessment
+- `--tailor-resumes` — Tailor resumes
+- `--no-report` — Skip reports
+- `--demo` — Use mock data
+- `--min-fit 75` — Custom fit threshold
+- `--limit 100` — Custom job limit
 
 ## Project Structure
 
 ```
 job-search-agent/
-├── job_scraper.py         # Phase 1: Job discovery across multiple sources
-├── job_assessor.py        # Phase 2: Claude-powered fit/salary analysis (coming)
-├── tailor_resume.py       # Phase 3: Resume tailoring for ATS
-├── main.py                # CLI orchestrator (coming)
+├── main.py                 # ⭐ Unified orchestrator (Phase 4)
+├── job_scraper.py         # Phase 1: Job discovery
+├── job_assessor.py        # Phase 2: Job assessment
+├── tailor_resume.py       # Phase 3: Resume tailoring
+├── report_assessments.py  # Report generation
+├── demo_*.py              # Demo scripts
+├── test_*.py              # Unit tests
 ├── data/
-│   └── jobs.json          # Job database
-├── tailored_resumes/      # Output directory
-├── requirements.txt
-└── README.md
+│   ├── jobs.json
+│   └── assessments.json
+└── search_results/        # Output directory
 ```
 
 ## Configuration
 
-Edit your profile context in `tailor_resume.py`:
+Update your profile in `job_assessor.py`:
 
 ```python
 PROFILE_CONTEXT = """
 Candidate: BI and Analytics Leader
-- 15+ years experience in Business Intelligence and Data Analytics
-- Targeting Director / Senior Director / VP level roles
-- Based in Austin, TX (open to remote or hybrid)
-- Core tools: Tableau, Power BI, Snowflake, SQL, DAX
-- Sweet-spot industries: tech, SaaS, education, healthcare, operations
-- Target compensation: $180k–$240k
+- 15+ years in Business Intelligence and Data Analytics
+- Director / Senior Director / VP level
+- Austin, TX (remote/hybrid open)
+- Tools: Tableau, Power BI, Snowflake, SQL, DAX
+- Industries: Tech, SaaS, Education, Healthcare
+- Target: $180k–$240k
 """
 ```
-
-## Development Phases
-
-- ✅ **Phase 1**: Job Discovery (Indeed, LinkedIn, Glassdoor)
-- 🔄 **Phase 2**: Job Assessment (fit score, salary validation, red flags)
-- 📝 **Phase 3**: Resume Tailoring & PDF generation
-- 🚀 **Phase 4**: Integration & CLI orchestrator
 
 ## Testing
 
 ```bash
-# Test the scraper module
 python test_scraper.py
+python test_assessor.py
+python demo_assessor.py
+python demo_tailor.py
 ```
 
 ## Requirements
 
-- Python 3.12+ (required for RenderCV)
-- Anthropic API key (for Claude)
-- Internet connection (for job board scraping)
+- Python 3.12+ (for RenderCV)
+- Anthropic API key (optional for demo mode)
+- Internet connection
+
+## Pricing
+
+- Job Discovery: Free (scraping)
+- Assessment: $0.01-0.05 per job (Claude API)
+- Resume Tailoring: $0.05-0.15 per resume (Claude API)
+- Example: 50 jobs + 5 resumes ≈ $0.50-$3.00
+
+## Development Status
+
+✅ Phase 1: Job Discovery
+✅ Phase 2: Job Assessment
+✅ Phase 3: Resume Tailoring
+✅ Phase 4: Orchestration
 
 ## License
 

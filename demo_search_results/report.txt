@@ -1,0 +1,57 @@
+================================================================================
+JOB ASSESSMENT REPORT
+================================================================================
+
+📊 SUMMARY STATISTICS
+--------------------------------------------------------------------------------
+Total Jobs Assessed:        6
+Average Fit Score:          74.3/100
+🟢 Strong Fits (80+):       2 jobs
+🟡 Good Fits (60-79):       3 jobs
+🔴 Weak Fits (<40):         0 jobs
+
+🟢 STRONG FITS (APPLY IMMEDIATELY)
+--------------------------------------------------------------------------------
+
+88% — Director, Business Intelligence
+     Company: Tesla
+     Location: Austin, TX
+     🟢 STRONG FIT — Excellent match, apply immediately
+     Salary: Salary $200-260k is within target and well-aligned
+     Skills: Director level role, Austin location, High-growth company
+
+85% — Senior Business Intelligence Manager
+     Company: Instructure
+     Location: Austin, TX
+     🟢 STRONG FIT — Apply immediately
+     Salary: Salary $180-220k is within target range
+     Skills: BI leadership, Austin location, EdTech market
+
+🟡 GOOD FITS (CONSIDER)
+--------------------------------------------------------------------------------
+
+78% — VP of Analytics & Insights
+     Company: Tableau Software
+     Location: Seattle, WA
+     ⚠️  Seattle location (not Austin)
+     ✓ Perfect role level
+
+72% — Data Analytics Lead
+     Company: Dell Technologies
+     Location: Austin, TX
+     ⚠️  Below target salary
+     ✓ Local Austin opportunity
+
+65% — Analytics Engineer (Remote)
+     Company: Databricks
+     Location: Remote
+     ⚠️  More technical/engineering than leadership
+     ✓ Fully remote
+
+🔴 WEAK FITS (SKIP)
+--------------------------------------------------------------------------------
+
+58% — Senior BI Developer @ IBM
+     Issues: Below target salary; Developer role not leadership
+
+================================================================================

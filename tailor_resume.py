@@ -142,7 +142,7 @@ def slug(text: str) -> str:
     return re.sub(r"[^a-zA-Z0-9]+", "_", text).strip("_")
 
 
-def call_claude(prompt: str, model: str = "claude-sonnet-4-20250514") -> str:
+def call_claude(prompt: str, model: str = "claude-sonnet-4-5") -> str:
     client = anthropic.Anthropic(api_key=os.environ.get("ANTHROPIC_API_KEY"))
     message = client.messages.create(
         model=model,

@@ -1,0 +1,162 @@
+{
+  "data_analytics_lead_dell_technologies_austin_tx": {
+    "job_id": "data_analytics_lead_dell_technologies_austin_tx",
+    "fit_score": 72,
+    "salary_assessment": {
+      "salary_aligned": false,
+      "comment": "Salary $160-200k is slightly below target range"
+    },
+    "key_skills_match": [
+      "Austin location",
+      "Leadership opportunity",
+      "Enterprise scale"
+    ],
+    "red_flags": [
+      "Below target salary",
+      "Less strategic than director role"
+    ],
+    "pros": [
+      "Local Austin opportunity",
+      "Large enterprise",
+      "Hybrid flexibility"
+    ],
+    "cons": [
+      "Salary below target",
+      "More operational than strategic"
+    ],
+    "recommendation": "\ud83d\udfe1 CONSIDER \u2014 Good local opportunity but salary lower"
+  },
+  "senior_bi_developer_ibm_hybrid_austin_area": {
+    "job_id": "senior_bi_developer_ibm_hybrid_austin_area",
+    "fit_score": 58,
+    "salary_assessment": {
+      "salary_aligned": false,
+      "comment": "Salary $140-180k is below target, more senior developer than leader"
+    },
+    "key_skills_match": [
+      "Austin area",
+      "Hybrid flexibility"
+    ],
+    "red_flags": [
+      "Below target salary",
+      "Developer role not leadership",
+      "Mature enterprise tech stack"
+    ],
+    "pros": [
+      "Hybrid arrangement",
+      "IBM's established analytics practice",
+      "Austin area location"
+    ],
+    "cons": [
+      "Salary too low",
+      "Less strategic than target role",
+      "More technical than management"
+    ],
+    "recommendation": "\ud83d\udd34 SKIP \u2014 Salary below target and less aligned with leadership goals"
+  },
+  "senior_business_intelligence_manager_instructure_austin_tx": {
+    "job_id": "senior_business_intelligence_manager_instructure_austin_tx",
+    "fit_score": 85,
+    "salary_assessment": {
+      "salary_aligned": true,
+      "comment": "Salary $180-220k is within target range"
+    },
+    "key_skills_match": [
+      "BI leadership",
+      "Austin location",
+      "EdTech market",
+      "Team management"
+    ],
+    "red_flags": [],
+    "pros": [
+      "Perfect role level",
+      "Excellent company culture",
+      "Growth opportunity in EdTech"
+    ],
+    "cons": [
+      "Highly competitive",
+      "May require relocation to Austin office"
+    ],
+    "recommendation": "\ud83d\udfe2 STRONG FIT \u2014 Apply immediately"
+  },
+  "director_business_intelligence_tesla_austin_tx": {
+    "job_id": "director_business_intelligence_tesla_austin_tx",
+    "fit_score": 88,
+    "salary_assessment": {
+      "salary_aligned": true,
+      "comment": "Salary $200-260k is within target and well-aligned"
+    },
+    "key_skills_match": [
+      "Director level role",
+      "Austin location",
+      "High-growth company",
+      "Data-driven culture"
+    ],
+    "red_flags": [],
+    "pros": [
+      "Perfect role level",
+      "Tesla's analytics maturity",
+      "Competitive salary",
+      "Local Austin position"
+    ],
+    "cons": [
+      "Highly competitive",
+      "Fast-paced demanding culture"
+    ],
+    "recommendation": "\ud83d\udfe2 STRONG FIT \u2014 Excellent match, apply immediately"
+  },
+  "analytics_engineer_remote_databricks_remote": {
+    "job_id": "analytics_engineer_remote_databricks_remote",
+    "fit_score": 65,
+    "salary_assessment": {
+      "salary_aligned": true,
+      "comment": "Salary $170-240k is within range, fully remote"
+    },
+    "key_skills_match": [
+      "Remote opportunity",
+      "Data engineering background",
+      "Modern data stack"
+    ],
+    "red_flags": [
+      "More technical/engineering than leadership",
+      "Younger role level"
+    ],
+    "pros": [
+      "Fully remote",
+      "Industry leader in data analytics",
+      "Competitive salary"
+    ],
+    "cons": [
+      "Less leadership-oriented",
+      "Different skill focus from BI management"
+    ],
+    "recommendation": "\ud83d\udfe1 CONSIDER \u2014 Remote flexibility but less aligned with VP goals"
+  },
+  "vp_of_analytics_insights_tableau_software_seattle_wa": {
+    "job_id": "vp_of_analytics_insights_tableau_software_seattle_wa",
+    "fit_score": 78,
+    "salary_assessment": {
+      "salary_aligned": true,
+      "comment": "Salary $220-280k exceeds target but acceptable for VP role"
+    },
+    "key_skills_match": [
+      "VP level",
+      "Analytics strategy",
+      "Tableau expertise"
+    ],
+    "red_flags": [
+      "Seattle location (not Austin)",
+      "Requires relocation"
+    ],
+    "pros": [
+      "Perfect role level",
+      "Industry leader in analytics tools",
+      "Strategic role"
+    ],
+    "cons": [
+      "Requires relocation",
+      "Different geographic market"
+    ],
+    "recommendation": "\ud83d\udfe1 CONSIDER \u2014 Excellent role but location mismatch"
+  }
+}

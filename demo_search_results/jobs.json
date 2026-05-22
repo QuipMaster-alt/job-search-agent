@@ -1,0 +1,80 @@
+{
+  "senior_business_intelligence_manager_instructure_austin_tx": {
+    "job_id": "senior_business_intelligence_manager_instructure_austin_tx",
+    "title": "Senior Business Intelligence Manager",
+    "company": "Instructure",
+    "location": "Austin, TX",
+    "url": "https://www.instructure.com/careers/jobs/123",
+    "source": "indeed",
+    "posted_date": "2026-05-19T22:00:54.396082",
+    "description": "",
+    "salary_min": 180000,
+    "salary_max": 220000,
+    "job_type": "full-time"
+  },
+  "vp_of_analytics_insights_tableau_software_seattle_wa": {
+    "job_id": "vp_of_analytics_insights_tableau_software_seattle_wa",
+    "title": "VP of Analytics & Insights",
+    "company": "Tableau Software",
+    "location": "Seattle, WA",
+    "url": "https://www.tableau.com/careers/jobs/456",
+    "source": "linkedin",
+    "posted_date": "2026-05-16T22:00:54.396116",
+    "description": "",
+    "salary_min": 220000,
+    "salary_max": 280000,
+    "job_type": "full-time"
+  },
+  "data_analytics_lead_dell_technologies_austin_tx": {
+    "job_id": "data_analytics_lead_dell_technologies_austin_tx",
+    "title": "Data Analytics Lead",
+    "company": "Dell Technologies",
+    "location": "Austin, TX",
+    "url": "https://www.dell.com/careers/jobs/789",
+    "source": "glassdoor",
+    "posted_date": "2026-05-20T22:00:54.396124",
+    "description": "",
+    "salary_min": 160000,
+    "salary_max": 200000,
+    "job_type": "full-time"
+  },
+  "director_business_intelligence_tesla_austin_tx": {
+    "job_id": "director_business_intelligence_tesla_austin_tx",
+    "title": "Director, Business Intelligence",
+    "company": "Tesla",
+    "location": "Austin, TX",
+    "url": "https://www.tesla.com/careers/jobs/101",
+    "source": "indeed",
+    "posted_date": "2026-05-18T22:00:54.396128",
+    "description": "",
+    "salary_min": 200000,
+    "salary_max": 260000,
+    "job_type": "full-time"
+  },
+  "analytics_engineer_remote_databricks_remote": {
+    "job_id": "analytics_engineer_remote_databricks_remote",
+    "title": "Analytics Engineer (Remote)",
+    "company": "Databricks",
+    "location": "Remote",
+    "url": "https://www.databricks.com/careers/jobs/202",
+    "source": "linkedin",
+    "posted_date": "2026-05-17T22:00:54.396131",
+    "description": "",
+    "salary_min": 170000,
+    "salary_max": 240000,
+    "job_type": "full-time"
+  },
+  "senior_bi_developer_ibm_hybrid_austin_area": {
+    "job_id": "senior_bi_developer_ibm_hybrid_austin_area",
+    "title": "Senior BI Developer",
+    "company": "IBM",
+    "location": "Hybrid - Austin area",
+    "url": "https://www.ibm.com/careers/jobs/303",
+    "source": "glassdoor",
+    "posted_date": "2026-05-19T22:00:54.396135",
+    "description": "",
+    "salary_min": 140000,
+    "salary_max": 180000,
+    "job_type": "full-time"
+  }
+}
