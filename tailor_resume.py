@@ -88,16 +88,15 @@ that best positions this candidate. You may:
 1. REORDER highlights within each experience entry to front-load the most
    relevant accomplishments for this role. Do not add or remove highlights.
 
-2. REWRITE the summary/objective section (if present) to directly address
-   the role's key themes (e.g. EdTech transformation, SaaS scale, etc.)
-   Keep it to 2–3 sentences maximum.
+2. REWRITE the summary section to 2-3 sentences max, directly mirroring 
+   the language and priorities of this specific job posting. Use keywords 
+   from the JD naturally. Make it specific to this role and company — 
+   not generic BI language.
 
 3. REORDER skills entries to lead with the tools/categories most relevant
    to the job posting.
 
-4. ADD a `top_note` field at the top level (outside cv) if the job has a
-   specific theme worth calling out — a one-line positioning statement.
-   Keep it under 120 characters. If not needed, omit it.
+4. DO NOT add a top_note field. Skip this entirely.
 
 5. DO NOT change company names, dates, titles, or invent new experience.
 
@@ -160,9 +159,11 @@ def parse_claude_yaml(raw: str) -> dict:
 
 def render_pdf(yaml_path: Path, output_dir: Path) -> Optional[Path]:
     """Render PDF using RenderCV. Returns None if rendering fails."""
+    import shutil
+    rendercv_path = "/Users/luismartinez/job-search-agent/venv/bin/rendercv"
     result = subprocess.run(
         [
-            sys.executable, "-m", "rendercv", "render",
+            rendercv_path, "render",
             str(yaml_path),
             "--output-folder-name", str(output_dir),
         ],
@@ -233,6 +234,11 @@ def tailor(
     date_str = datetime.today().strftime("%Y%m%d")
     company_slug = slug(job_company)
     title_slug = slug(job_title)
+
+    # Inject company/role into cv.name so rendercv output filename is unique
+    original_name = tailored_cv["cv"].get("name", "Luis_Martinez_CV")
+    tailored_cv["cv"]["name"] = f"{original_name}_{company_slug}_{title_slug}"
+
     output_dir.mkdir(parents=True, exist_ok=True)
 
     tailored_yaml_path = output_dir / f"CV_{company_slug}_{title_slug}_{date_str}.yaml"
@@ -254,7 +260,6 @@ def tailor(
         "company": job_company,
         "title": job_title,
     }
-
 
 def tailor_batch(
     cv_path: Path,
